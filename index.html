@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Asistente CITEsmart</title>
+
+    <link rel="stylesheet" href="css/chatbot.css">
+</head>
+
+<body>
+
+    <main class="pagina-demo">
+        <h1>CITEsmart</h1>
+        <p>Prototipo del asistente de navegación.</p>
+    </main>
+
+    <!-- Botón flotante -->
+    <button id="chatbot-boton" class="chatbot-boton">
+        💬
+    </button>
+
+
+    <!-- Ventana del chatbot -->
+    <section id="chatbot" class="chatbot">
+
+        <header class="chatbot-header">
+
+            <div>
+                <strong>Richilin - Asistente CITEsmart</strong>
+                <span>Encuentra información en el portal</span>
+            </div>
+
+            <button id="chatbot-cerrar">×</button>
+
+        </header>
+
+
+        <div id="chatbot-mensajes" class="chatbot-mensajes">
+
+            <div class="mensaje bot">
+                Hola. ¿Qué información estás buscando?
+            </div>
+
+        </div>
+
+
+        <form id="chatbot-form" class="chatbot-form">
+
+            <input
+                id="chatbot-input"
+                type="text"
+                placeholder="Escribe tu consulta..."
+                autocomplete="off"
+            >
+
+            <button type="submit">
+                ➤
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- Primero conocimiento -->
+    <script src="js/conocimiento.js"></script>
+
+    <!-- Después funcionamiento -->
+    <script src="js/chatbot.js"></script>
+
+</body>
+</html>
