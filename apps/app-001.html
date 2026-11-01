@@ -1,141 +1,156 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
-    <title>Mapa Interactivo CITE/UT | Zero System Lab</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="color-scheme" content="light">
+  <title>Mapa Interactivo CITE/UT | Zero System Lab</title>
 
-    <style>
-        :root {
-            --navy: #071426;
-            --red: #ed1b2f;
-            --footer-mask: 34px;
-        }
+  <style>
+    :root {
+      color-scheme: light;
+      --navy: #071426;
+      --red: #ed1b2f;
+      --footer-mask: 34px;
+    }
 
-        * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-        html, body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                Roboto, Helvetica, Arial, sans-serif;
-            background: #fff;
-        }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #ffffff;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+    }
 
-        .zero-bar {
-            height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            padding: 8px 22px;
-            background: var(--navy);
-            color: #fff;
-        }
+    .zero-bar {
+      width: 100%;
+      height: 56px;
+      margin: 0;
+      padding: 8px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--navy);
+      color: #ffffff;
+    }
 
-        .brand {
-            font-size: 16px;
-            font-weight: 800;
-            font-style: italic;
-            white-space: nowrap;
-        }
+    .brand {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      font-style: italic;
+      white-space: nowrap;
+    }
 
-        .brand span {
-            color: var(--red);
-            margin-left: 4px;
-        }
+    .brand span {
+      margin-left: 4px;
+      color: var(--red);
+    }
 
-        .back {
-            min-height: 38px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 12px;
-            border: 1px solid rgba(255,255,255,.20);
-            border-radius: 9px;
-            color: #fff;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
-        }
+    .back {
+      min-height: 38px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,.20);
+      border-radius: 9px;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
 
-        .app-stage {
-            position: relative;
-            width: 100%;
-            height: calc(100% - 56px);
-            overflow: hidden;
-            background: #fff;
-        }
+    .app-stage {
+      position: relative;
+      width: 100%;
+      height: calc(100% - 56px);
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #ffffff;
+    }
 
-        .app-frame {
-            display: block;
-            width: 100%;
-            height: 100%;
-            border: 0;
-            background: #fff;
-        }
+    .app-frame {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      background: #ffffff;
+    }
 
-        /*
-         * Máscara únicamente visual sobre la franja inferior.
-         * El iframe conserva su tamaño normal y su scroll interno completo.
-         * Ajustar --footer-mask si la franja de créditos cambia de altura.
-         */
-        .footer-mask {
-            position: absolute;
-            z-index: 10;
-            left: 0;
-            right: 14px;
-            bottom: 0;
-            height: var(--footer-mask);
-            background: #fff;
-            pointer-events: none;
-        }
+    .footer-mask {
+      position: absolute;
+      z-index: 10;
+      left: 0;
+      right: 16px;
+      bottom: 0;
+      height: var(--footer-mask);
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      pointer-events: none;
+    }
 
-        @media (max-width: 700px) {
-            :root {
-                --footer-mask: 30px;
-            }
+    @media (max-width: 700px) {
+      :root {
+        --footer-mask: 30px;
+      }
 
-            .zero-bar {
-                height: 52px;
-                padding: 7px 12px;
-            }
+      .zero-bar {
+        height: 52px;
+        padding: 7px 12px;
+      }
 
-            .brand { font-size: 14px; }
+      .brand {
+        font-size: 14px;
+      }
 
-            .back {
-                min-height: 36px;
-                padding: 0 10px;
-                font-size: 12px;
-            }
+      .back {
+        min-height: 36px;
+        padding: 0 10px;
+        font-size: 12px;
+      }
 
-            .app-stage {
-                height: calc(100% - 52px);
-            }
-        }
-    </style>
+      .app-stage {
+        height: calc(100% - 52px);
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <header class="zero-bar">
-        <div class="brand">ZERO SYSTEM LAB<span>/</span></div>
-        <a class="back" href="../index.html">← Volver a Zero</a>
-    </header>
+  <header class="zero-bar">
+    <div class="brand">ZERO SYSTEM LAB<span>/</span></div>
+    <a class="back" href="../index.html">← Volver a Zero</a>
+  </header>
 
-    <main class="app-stage">
-        <iframe
-            class="app-frame"
-            src="https://nf-001.streamlit.app/?embed=true"
-            title="Mapa Interactivo CITE/UT"
-            loading="eager"
-            scrolling="yes"
-            referrerpolicy="strict-origin-when-cross-origin">
-        </iframe>
+  <main class="app-stage">
+    <iframe
+      class="app-frame"
+      src="https://nf-001.streamlit.app/?embed=true&theme=light"
+      title="Mapa Interactivo CITE/UT"
+      loading="eager"
+      scrolling="yes"
+      referrerpolicy="strict-origin-when-cross-origin">
+    </iframe>
 
-        <div class="footer-mask" aria-hidden="true"></div>
-    </main>
+    <div class="footer-mask" aria-hidden="true"></div>
+  </main>
 </body>
 </html>
