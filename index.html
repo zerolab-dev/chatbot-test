@@ -3,72 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Asistente CITEsmart</title>
-
-    <link rel="stylesheet" href="css/chatbot.css">
+    <title>Zero System Lab</title>
+    <link rel="stylesheet" href="css/zero.css">
 </head>
-
 <body>
+    <header class="topbar">
+        <div class="brand">ZERO SYSTEM LAB<span>/</span></div>
+    </header>
 
-    <main class="pagina-demo">
-        <h1>CITEsmart</h1>
-        <p>Prototipo del asistente de navegación.</p>
+    <main class="zero-app">
+        <section class="welcome" id="welcome">
+            <h1>Hola, soy <span>Zero.</span></h1>
+            <p>¿En qué puedo ayudarte hoy?</p>
+        </section>
+
+        <section class="conversation" id="conversation" aria-live="polite"></section>
+
+        <div class="composer-wrapper">
+            <form class="composer" id="chatForm">
+                <textarea id="messageInput" rows="1" maxlength="500"
+                    placeholder="Escribe tu consulta..."
+                    aria-label="Escribe tu consulta"></textarea>
+
+                <button class="send-button" id="sendButton" type="submit"
+                    aria-label="Enviar mensaje">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3.4 20.4 21 12 3.4 3.6l2.1 6.5L15 12l-9.5 1.9-2.1 6.5Z"></path>
+                    </svg>
+                </button>
+            </form>
+            <div class="zero-note">Zero System Lab · Versión inicial</div>
+        </div>
     </main>
 
-    <!-- Botón flotante -->
-    <button id="chatbot-boton" class="chatbot-boton">
-        💬
-    </button>
-
-
-    <!-- Ventana del chatbot -->
-    <section id="chatbot" class="chatbot">
-
-        <header class="chatbot-header">
-
-            <div>
-                <strong>Richilin - Asistente CITEsmart</strong>
-                <span>Encuentra información en el portal</span>
-            </div>
-
-            <button id="chatbot-cerrar">×</button>
-
-        </header>
-
-
-        <div id="chatbot-mensajes" class="chatbot-mensajes">
-
-            <div class="mensaje bot">
-                Hola. ¿Qué información estás buscando?
-            </div>
-
-        </div>
-
-
-        <form id="chatbot-form" class="chatbot-form">
-
-            <input
-                id="chatbot-input"
-                type="text"
-                placeholder="Escribe tu consulta..."
-                autocomplete="off"
-            >
-
-            <button type="submit">
-                ➤
-            </button>
-
-        </form>
-
-    </section>
-
-
-    <!-- Primero conocimiento -->
-    <script src="js/conocimiento.js"></script>
-
-    <!-- Después funcionamiento -->
-    <script src="js/chatbot.js"></script>
-
+    <script src="js/engine.js"></script>
+    <script src="js/zero.js"></script>
 </body>
 </html>

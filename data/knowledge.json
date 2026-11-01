@@ -1,0 +1,112 @@
+{
+  "version": "0.1",
+  "assistant": {
+    "name": "Zero",
+    "project": "Zero System Lab"
+  },
+  "knowledge": [
+    {
+      "id": "SYS_001",
+      "type": "conversation",
+      "name": "Saludo",
+      "priority": 10,
+      "patterns": [
+        "hola",
+        "buenos dias",
+        "buenas tardes",
+        "buenas noches",
+        "hey",
+        "hola zero"
+      ],
+      "responses": [
+        "Hola. ¿En qué puedo ayudarte?",
+        "Hola. ¿Qué necesitas encontrar?",
+        "Aquí estoy. ¿Qué necesitas?"
+      ],
+      "action": null
+    },
+    {
+      "id": "SYS_002",
+      "type": "information",
+      "name": "Identidad de Zero",
+      "priority": 20,
+      "patterns": [
+        "quien eres",
+        "que eres",
+        "como te llamas",
+        "quien es zero",
+        "que es zero"
+      ],
+      "responses": [
+        "Soy Zero, el asistente de Zero System Lab. Puedo ayudarte a encontrar herramientas, información y recursos disponibles en este espacio."
+      ],
+      "action": null
+    },
+    {
+      "id": "SYS_003",
+      "type": "information",
+      "name": "Zero System Lab",
+      "priority": 20,
+      "patterns": [
+        "que es zero system lab",
+        "zero system lab",
+        "que puedo encontrar aqui",
+        "que hay aqui",
+        "que puedes hacer"
+      ],
+      "responses": [
+        "Zero System Lab reúne herramientas, aplicaciones y recursos. Puedes decirme qué necesitas y trataré de llevarte al recurso adecuado."
+      ],
+      "action": null
+    },
+    {
+      "id": "APP_001",
+      "type": "application",
+      "name": "Mapa Interactivo CITE/UT",
+      "priority": 50,
+      "terms": [
+        "cite",
+        "ut",
+        "mapa",
+        "ubicacion",
+        "ubicaciones",
+        "region",
+        "regiones",
+        "servicio",
+        "servicios",
+        "tematica",
+        "tematicas"
+      ],
+      "patterns": [
+        "mapa de cite",
+        "mapa cite",
+        "donde estan los cite",
+        "donde estan ubicados los cite",
+        "cite por region",
+        "cite por regiones",
+        "ubicacion de los cite",
+        "ubicaciones de cite",
+        "servicios de los cite",
+        "tematicas de los cite",
+        "quiero ver los cite",
+        "quiero ver los cite por region"
+      ],
+      "responses": [
+        "Tengo una herramienta para eso. El Mapa Interactivo CITE/UT permite explorar los CITE y UT por región, así como consultar sus servicios y principales temáticas.",
+        "Puedes consultar esa información en el Mapa Interactivo CITE/UT. Allí podrás explorar las unidades por región, servicios y temáticas."
+      ],
+      "action": {
+        "type": "open_app",
+        "label": "Abrir Mapa Interactivo CITE/UT",
+        "target": "apps/app-001.html"
+      }
+    }
+  ],
+  "fallback": {
+    "responses": [
+      "Todavía no tengo una respuesta para esa consulta.",
+      "No encontré un recurso relacionado con tu consulta.",
+      "Aún no tengo información suficiente para responder eso."
+    ]
+  }
+}
