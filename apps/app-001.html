@@ -10,42 +10,36 @@
         :root {
             --navy: #071426;
             --red: #ed1b2f;
+            --footer-mask: 34px;
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
-        html,
-        body {
+        html, body {
             margin: 0;
             width: 100%;
-            min-height: 100%;
-            background: #ffffff;
+            height: 100%;
+            overflow: hidden;
             font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
                 Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            overflow-x: hidden;
+            background: #fff;
         }
 
         .zero-bar {
-            min-height: 56px;
+            height: 56px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 16px;
             padding: 8px 22px;
             background: var(--navy);
-            color: #ffffff;
+            color: #fff;
         }
 
         .brand {
             font-size: 16px;
             font-weight: 800;
             font-style: italic;
-            letter-spacing: .25px;
             white-space: nowrap;
         }
 
@@ -62,7 +56,7 @@
             padding: 0 12px;
             border: 1px solid rgba(255,255,255,.20);
             border-radius: 9px;
-            color: #ffffff;
+            color: #fff;
             text-decoration: none;
             font-size: 13px;
             font-weight: 600;
@@ -71,38 +65,46 @@
         .app-stage {
             position: relative;
             width: 100%;
-            height: calc(100vh - 56px);
-            min-height: 700px;
+            height: calc(100% - 56px);
             overflow: hidden;
-            background: #ffffff;
+            background: #fff;
         }
 
-        /*
-         * El iframe ocupa prácticamente toda la página.
-         * No hay tarjeta, borde, título externo ni contenedor visual.
-         *
-         * Se añade altura al documento embebido para que su zona inferior
-         * quede por debajo de la ventana visible de Zero.
-         */
         .app-frame {
             display: block;
             width: 100%;
-            height: calc(100% + 360px);
+            height: 100%;
             border: 0;
-            margin: 0;
-            padding: 0;
-            background: #ffffff;
+            background: #fff;
+        }
+
+        /*
+         * Máscara únicamente visual sobre la franja inferior.
+         * El iframe conserva su tamaño normal y su scroll interno completo.
+         * Ajustar --footer-mask si la franja de créditos cambia de altura.
+         */
+        .footer-mask {
+            position: absolute;
+            z-index: 10;
+            left: 0;
+            right: 14px;
+            bottom: 0;
+            height: var(--footer-mask);
+            background: #fff;
+            pointer-events: none;
         }
 
         @media (max-width: 700px) {
+            :root {
+                --footer-mask: 30px;
+            }
+
             .zero-bar {
-                min-height: 52px;
+                height: 52px;
                 padding: 7px 12px;
             }
 
-            .brand {
-                font-size: 14px;
-            }
+            .brand { font-size: 14px; }
 
             .back {
                 min-height: 36px;
@@ -111,19 +113,13 @@
             }
 
             .app-stage {
-                height: calc(100vh - 52px);
-                min-height: 650px;
-            }
-
-            .app-frame {
-                height: calc(100% + 460px);
+                height: calc(100% - 52px);
             }
         }
     </style>
 </head>
 
 <body>
-
     <header class="zero-bar">
         <div class="brand">ZERO SYSTEM LAB<span>/</span></div>
         <a class="back" href="../index.html">← Volver a Zero</a>
@@ -135,9 +131,11 @@
             src="https://nf-001.streamlit.app/?embed=true"
             title="Mapa Interactivo CITE/UT"
             loading="eager"
+            scrolling="yes"
             referrerpolicy="strict-origin-when-cross-origin">
         </iframe>
-    </main>
 
+        <div class="footer-mask" aria-hidden="true"></div>
+    </main>
 </body>
 </html>
