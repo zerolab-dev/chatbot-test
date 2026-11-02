@@ -1,13 +1,9 @@
 {
-  "version": "0.1",
-  "assistant": {
-    "name": "Zero",
-    "project": "Zero System Lab"
-  },
-  "knowledge": [
+  "version": "0.2-test",
+  "entries": [
     {
       "id": "SYS_001",
-      "type": "conversation",
+      "type": "system",
       "name": "Saludo",
       "priority": 10,
       "patterns": [
@@ -18,16 +14,15 @@
         "hey",
         "hola zero"
       ],
+      "terms": [],
       "responses": [
         "Hola. ¿En qué puedo ayudarte?",
-        "Hola. ¿Qué necesitas encontrar?",
-        "Aquí estoy. ¿Qué necesitas?"
-      ],
-      "action": null
+        "Hola. ¿Qué necesitas encontrar?"
+      ]
     },
     {
       "id": "SYS_002",
-      "type": "information",
+      "type": "system",
       "name": "Identidad de Zero",
       "priority": 20,
       "patterns": [
@@ -37,76 +32,133 @@
         "quien es zero",
         "que es zero"
       ],
+      "terms": [],
       "responses": [
-        "Soy Zero, el asistente de Zero System Lab. Puedo ayudarte a encontrar herramientas, información y recursos disponibles en este espacio."
-      ],
-      "action": null
-    },
-    {
-      "id": "SYS_003",
-      "type": "information",
-      "name": "Zero System Lab",
-      "priority": 20,
-      "patterns": [
-        "que es zero system lab",
-        "zero system lab",
-        "que puedo encontrar aqui",
-        "que hay aqui",
-        "que puedes hacer"
-      ],
-      "responses": [
-        "Zero System Lab reúne herramientas, aplicaciones y recursos. Puedes decirme qué necesitas y trataré de llevarte al recurso adecuado."
-      ],
-      "action": null
+        "Soy Zero, el asistente de Zero System Lab. Puedo ayudarte a encontrar herramientas, información y recursos."
+      ]
     },
     {
       "id": "APP_001",
-      "type": "application",
+      "type": "internal_app",
       "name": "Mapa Interactivo CITE/UT",
       "priority": 50,
-      "terms": [
-        "cite",
-        "ut",
-        "mapa",
-        "ubicacion",
-        "ubicaciones",
-        "region",
-        "regiones",
-        "servicio",
-        "servicios",
-        "tematica",
-        "tematicas"
-      ],
       "patterns": [
         "mapa de cite",
         "mapa cite",
         "donde estan los cite",
         "donde estan ubicados los cite",
-        "cite por region",
-        "cite por regiones",
-        "ubicacion de los cite",
-        "ubicaciones de cite",
-        "servicios de los cite",
-        "tematicas de los cite",
-        "quiero ver los cite",
-        "quiero ver los cite por region"
+        "ubicacion de los cite"
+      ],
+      "terms": [
+        "mapa",
+        "ubicacion",
+        "localizacion",
+        "tematicas"
       ],
       "responses": [
-        "Tengo una herramienta para eso. El Mapa Interactivo CITE/UT permite explorar los CITE y UT por región, así como consultar sus servicios y principales temáticas.",
-        "Puedes consultar esa información en el Mapa Interactivo CITE/UT. Allí podrás explorar las unidades por región, servicios y temáticas."
+        "Tengo una herramienta para eso. El Mapa Interactivo CITE/UT permite explorar los CITE y UT por región, servicios y temáticas."
       ],
       "action": {
-        "type": "open_app",
+        "type": "open_internal",
         "label": "Abrir Mapa Interactivo CITE/UT",
         "target": "apps/app-001.html"
+      }
+    },
+    {
+      "id": "REP_REGIONAL",
+      "type": "asset_family",
+      "name": "Reportes Estadísticos de Intervención Regional",
+      "priority": 70,
+      "entity_values": [
+        "amazonas",
+        "ancash",
+        "apurimac",
+        "arequipa",
+        "ayacucho",
+        "cajamarca",
+        "callao",
+        "cusco",
+        "huancavelica",
+        "huanuco",
+        "ica",
+        "junin",
+        "la libertad",
+        "lambayeque",
+        "lima",
+        "loreto",
+        "madre de dios",
+        "moquegua",
+        "pasco",
+        "piura",
+        "puno",
+        "san martin",
+        "tacna",
+        "tumbes",
+        "ucayali"
+      ],
+      "patterns": [
+        "ayuda memoria regional",
+        "ayudas memorias regionales",
+        "reporte regional",
+        "reportes regionales",
+        "intervencion regional",
+        "estadisticas regionales"
+      ],
+      "terms": [
+        "region",
+        "regional",
+        "departamento",
+        "intervencion",
+        "estadisticas",
+        "ayuda memoria"
+      ],
+      "responses": [
+        "Puedes consultar esa información en los Reportes Estadísticos de Intervención Regional de InfoCITE."
+      ],
+      "entity_response": "Encontré el reporte regional correspondiente a {entity}. En InfoCITE podrás consultar su ayuda memoria actualizada y revisar la intervención de la Red CITE en esa región.",
+      "action": {
+        "type": "open_external",
+        "label": "Ver Reportes Regionales",
+        "target": "https://public.tableau.com/app/profile/estadistica.y.gestion.de.informaci.n.dse/viz/InfoCITE_Reporte_v0/Dashboard03_02"
+      }
+    },
+    {
+      "id": "REP_CITE_UT",
+      "type": "asset_family",
+      "name": "Reportes Estadísticos de Intervención por CITE/UT Público",
+      "priority": 75,
+      "patterns": [
+        "ayuda memoria del cite",
+        "ayuda memoria de cite",
+        "reporte del cite",
+        "reporte cite",
+        "estadisticas del cite",
+        "reporte de ut",
+        "ayuda memoria de ut",
+        "reportes cite ut"
+      ],
+      "terms": [
+        "cite",
+        "ut",
+        "unidad tecnica",
+        "intervencion",
+        "estadisticas",
+        "ayuda memoria"
+      ],
+      "responses": [
+        "Puedes consultar esa información en los Reportes Estadísticos de Intervención por CITE/UT Público de InfoCITE."
+      ],
+      "action": {
+        "type": "open_external",
+        "label": "Ver Reportes CITE/UT Público",
+        "target": "https://public.tableau.com/app/profile/estadistica.y.gestion.de.informaci.n.dse/viz/InfoCITE_Reporte_v0/Dashboard03_01"
       }
     }
   ],
   "fallback": {
     "responses": [
       "Todavía no tengo una respuesta para esa consulta.",
-      "No encontré un recurso relacionado con tu consulta.",
-      "Aún no tengo información suficiente para responder eso."
+      "No encontré un recurso relacionado con tu consulta."
     ]
   }
 }
