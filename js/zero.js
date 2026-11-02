@@ -1,15 +1,83 @@
-document.addEventListener("DOMContentLoaded",async()=>{
- await loadKnowledge();
- const form=document.getElementById("zero-form"),input=document.getElementById("zero-input"),conversation=document.getElementById("zero-conversation"),app=document.querySelector(".zero-app");
- function addMessage(text,role,action=null){
-  const wrap=document.createElement("div");wrap.className=`message ${role}`;
-  const bubble=document.createElement("div");bubble.className="bubble";bubble.textContent=text;wrap.appendChild(bubble);
-  if(action){const a=document.createElement("a");a.className="zero-action";a.textContent=action.label;a.href=action.target;
-   if(action.type==="open_external"){a.target="_blank";a.rel="noopener noreferrer";}wrap.appendChild(a);}
-  conversation.appendChild(wrap);conversation.scrollTop=conversation.scrollHeight;
- }
- function send(){const text=input.value.trim();if(!text)return;app.classList.add("chat-active");addMessage(text,"user");input.value="";input.style.height="auto";const r=findKnowledge(text);setTimeout(()=>addMessage(r.response,"zero",r.action),250);}
- form.addEventListener("submit",e=>{e.preventDefault();send();});
- input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();}});
- input.addEventListener("input",()=>{input.style.height="auto";input.style.height=Math.min(input.scrollHeight,140)+"px";});
+const app = document.querySelector(".zero-app");
+const form = document.getElementById("chatForm");
+const input = document.getElementById("messageInput");
+const conversation = document.getElementById("conversation");
+
+loadKnowledge();
+
+form.addEventListener("submit", event => {
+    event.preventDefault();
+    sendMessage();
 });
+
+input.addEventListener("keydown", event => {
+    if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+    }
+});
+
+input.addEventListener("input", function () {
+    this.style.height = "auto";
+    this.style.height = Math.min(this.scrollHeight, 150) + "px";
+});
+
+function sendMessage() {
+    const text = input.value.trim();
+    if (!text) return;
+
+    app.classList.add("chat-active");
+    addTextMessage(text, "user");
+
+    input.value = "";
+    input.style.height = "auto";
+
+    const result = findKnowledge(text);
+
+    setTimeout(() => addZeroMessage(result), 300);
+}
+
+function addTextMessage(text, sender) {
+    const message = document.createElement("div");
+    message.className = `message ${sender}`;
+
+    const content = document.createElement("div");
+    content.className = "message-content";
+    content.textContent = text;
+
+    message.appendChild(content);
+    conversation.appendChild(message);
+    scrollConversation();
+}
+
+function addZeroMessage(result) {
+    const message = document.createElement("div");
+    message.className = "message zero";
+
+    const content = document.createElement("div");
+    content.className = "message-content";
+
+    const text = document.createElement("div");
+    text.textContent = result.response;
+    content.appendChild(text);
+
+    if (result.action) {
+        const button = document.createElement("a");
+        button.className = "zero-action";
+        button.textContent = result.action.label;
+        button.href = result.action.target;
+        content.appendChild(button);
+    }
+
+    message.appendChild(content);
+    conversation.appendChild(message);
+    scrollConversation();
+}
+
+function scrollConversation() {
+    const messages = conversation.querySelectorAll(".message");
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage) {
+        lastMessage.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+}
