@@ -1,9 +1,13 @@
 {
-  "version": "0.2-test",
-  "entries": [
+  "version": "0.2",
+  "assistant": {
+    "name": "Zero",
+    "project": "Zero System Lab"
+  },
+  "knowledge": [
     {
       "id": "SYS_001",
-      "type": "system",
+      "type": "conversation",
       "name": "Saludo",
       "priority": 10,
       "patterns": [
@@ -14,15 +18,16 @@
         "hey",
         "hola zero"
       ],
-      "terms": [],
       "responses": [
         "Hola. ¿En qué puedo ayudarte?",
-        "Hola. ¿Qué necesitas encontrar?"
-      ]
+        "Hola. ¿Qué necesitas encontrar?",
+        "Aquí estoy. ¿Qué necesitas?"
+      ],
+      "action": null
     },
     {
       "id": "SYS_002",
-      "type": "system",
+      "type": "information",
       "name": "Identidad de Zero",
       "priority": 20,
       "patterns": [
@@ -32,90 +37,102 @@
         "quien es zero",
         "que es zero"
       ],
-      "terms": [],
       "responses": [
-        "Soy Zero, el asistente de Zero System Lab. Puedo ayudarte a encontrar herramientas, información y recursos."
-      ]
+        "Soy Zero, el asistente de Zero System Lab. Puedo ayudarte a encontrar herramientas, información y recursos disponibles en este espacio."
+      ],
+      "action": null
+    },
+    {
+      "id": "SYS_003",
+      "type": "information",
+      "name": "Zero System Lab",
+      "priority": 20,
+      "patterns": [
+        "que es zero system lab",
+        "zero system lab",
+        "que puedo encontrar aqui",
+        "que hay aqui",
+        "que puedes hacer"
+      ],
+      "responses": [
+        "Zero System Lab reúne herramientas, aplicaciones y recursos. Puedes decirme qué necesitas y trataré de llevarte al recurso adecuado."
+      ],
+      "action": null
     },
     {
       "id": "APP_001",
-      "type": "internal_app",
+      "type": "application",
       "name": "Mapa Interactivo CITE/UT",
       "priority": 50,
+      "terms": [
+        "mapa",
+        "ubicacion",
+        "ubicaciones",
+        "localizacion",
+        "tematica",
+        "tematicas"
+      ],
       "patterns": [
         "mapa de cite",
         "mapa cite",
         "donde estan los cite",
         "donde estan ubicados los cite",
-        "ubicacion de los cite"
-      ],
-      "terms": [
-        "mapa",
-        "ubicacion",
-        "localizacion",
-        "tematicas"
+        "cite por region",
+        "cite por regiones",
+        "ubicacion de los cite",
+        "ubicaciones de cite",
+        "servicios de los cite",
+        "tematicas de los cite",
+        "quiero ver los cite",
+        "quiero ver los cite por region"
       ],
       "responses": [
-        "Tengo una herramienta para eso. El Mapa Interactivo CITE/UT permite explorar los CITE y UT por región, servicios y temáticas."
+        "Tengo una herramienta para eso. El Mapa Interactivo CITE/UT permite explorar los CITE y UT por región, así como consultar sus servicios y principales temáticas.",
+        "Puedes consultar esa información en el Mapa Interactivo CITE/UT. Allí podrás explorar las unidades por región, servicios y temáticas."
       ],
       "action": {
-        "type": "open_internal",
+        "type": "open_app",
         "label": "Abrir Mapa Interactivo CITE/UT",
         "target": "apps/app-001.html"
       }
     },
     {
       "id": "REP_REGIONAL",
-      "type": "asset_family",
+      "type": "report",
       "name": "Reportes Estadísticos de Intervención Regional",
-      "priority": 70,
-      "entity_values": [
-        "amazonas",
-        "ancash",
-        "apurimac",
-        "arequipa",
-        "ayacucho",
-        "cajamarca",
-        "callao",
-        "cusco",
-        "huancavelica",
-        "huanuco",
-        "ica",
-        "junin",
-        "la libertad",
-        "lambayeque",
-        "lima",
-        "loreto",
-        "madre de dios",
-        "moquegua",
-        "pasco",
-        "piura",
-        "puno",
-        "san martin",
-        "tacna",
-        "tumbes",
-        "ucayali"
+      "priority": 80,
+      "terms": [
+        "regional",
+        "regionales",
+        "region",
+        "regiones",
+        "departamento",
+        "departamentos",
+        "ayuda memoria",
+        "ayudas memorias",
+        "reporte",
+        "reportes",
+        "estadistica",
+        "estadisticas",
+        "intervencion"
       ],
       "patterns": [
         "ayuda memoria regional",
         "ayudas memorias regionales",
         "reporte regional",
         "reportes regionales",
+        "reporte de intervencion regional",
+        "reportes de intervencion regional",
+        "estadisticas regionales",
         "intervencion regional",
-        "estadisticas regionales"
-      ],
-      "terms": [
-        "region",
-        "regional",
-        "departamento",
-        "intervencion",
-        "estadisticas",
-        "ayuda memoria"
+        "ayuda memoria de amazonas",
+        "ayuda memoria de arequipa",
+        "ayuda memoria de puno"
       ],
       "responses": [
-        "Puedes consultar esa información en los Reportes Estadísticos de Intervención Regional de InfoCITE."
+        "Puedes consultar las ayudas memoria regionales en los Reportes Estadísticos de Intervención Regional de InfoCITE. Allí encontrarás el reporte actualizado de cada región del Perú.",
+        "Esa información se encuentra en los Reportes Estadísticos de Intervención Regional de InfoCITE, donde puedes seleccionar la región que necesites."
       ],
-      "entity_response": "Encontré el reporte regional correspondiente a {entity}. En InfoCITE podrás consultar su ayuda memoria actualizada y revisar la intervención de la Red CITE en esa región.",
       "action": {
         "type": "open_external",
         "label": "Ver Reportes Regionales",
@@ -124,29 +141,38 @@
     },
     {
       "id": "REP_CITE_UT",
-      "type": "asset_family",
+      "type": "report",
       "name": "Reportes Estadísticos de Intervención por CITE/UT Público",
-      "priority": 75,
-      "patterns": [
-        "ayuda memoria del cite",
-        "ayuda memoria de cite",
-        "reporte del cite",
-        "reporte cite",
-        "estadisticas del cite",
-        "reporte de ut",
-        "ayuda memoria de ut",
-        "reportes cite ut"
-      ],
+      "priority": 85,
       "terms": [
         "cite",
         "ut",
         "unidad tecnica",
-        "intervencion",
+        "ayuda memoria",
+        "ayudas memorias",
+        "reporte",
+        "reportes",
+        "estadistica",
         "estadisticas",
-        "ayuda memoria"
+        "intervencion"
+      ],
+      "patterns": [
+        "ayuda memoria del cite",
+        "ayuda memoria de cite",
+        "ayuda memoria de un cite",
+        "ayuda memoria de ut",
+        "reporte del cite",
+        "reporte de cite",
+        "reporte de ut",
+        "reportes cite ut",
+        "reportes de cite ut",
+        "estadisticas del cite",
+        "estadisticas de un cite",
+        "intervencion por cite"
       ],
       "responses": [
-        "Puedes consultar esa información en los Reportes Estadísticos de Intervención por CITE/UT Público de InfoCITE."
+        "Puedes consultar esa información en los Reportes Estadísticos de Intervención por CITE/UT Público de InfoCITE. Allí puedes seleccionar el CITE o UT que necesites.",
+        "Las ayudas memoria de cada CITE y UT pública se encuentran en InfoCITE, dentro de los Reportes Estadísticos de Intervención por CITE/UT Público."
       ],
       "action": {
         "type": "open_external",
@@ -158,7 +184,8 @@
   "fallback": {
     "responses": [
       "Todavía no tengo una respuesta para esa consulta.",
-      "No encontré un recurso relacionado con tu consulta."
+      "No encontré un recurso relacionado con tu consulta.",
+      "Aún no tengo información suficiente para responder eso."
     ]
   }
 }
